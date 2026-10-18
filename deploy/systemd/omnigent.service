@@ -18,6 +18,9 @@ Type=simple
 # since this runs headless.
 ExecStart={{OMNIGENT_BIN}} server --host 0.0.0.0 --no-open
 Environment=PATH={{OMNIGENT_PATH}}
+# The co-located host daemon renews its login from a refresh grant; extend the
+# grant's 30-day re-consent window so the unattended host stays connected.
+Environment=OMNIGENT_GRANT_MAX_LIFETIME_DAYS=365
 Restart=on-failure
 RestartSec=5
 

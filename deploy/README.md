@@ -76,9 +76,10 @@ deploy/
 ├── tailscale/         ← Tailscale (private access from phone/tablet/laptop
 │   └── README.md         via tailnet; Funnel for cloud sandbox dial-back)
 │
-├── systemd/           ← run the server (LAN-reachable, --host 0.0.0.0) as a
-│   ├── omnigent.service  Linux systemd --user service (starts at login,
-│   ├── install.sh        restarts on failure); NOT a cloud deploy target.
+├── systemd/           ← run the server (LAN-reachable, --host 0.0.0.0) and
+│   ├── omnigent.service  host daemon as Linux systemd --user services
+│   ├── omnigent-host.service.d/  (starts at login, restarts on failure);
+│   ├── install.sh        NOT a cloud deploy target.
 │   └── README.md
 │
 ├── daytona/           ← Daytona sandbox-provider guide + the Cloudflare
