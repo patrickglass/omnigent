@@ -1,0 +1,31 @@
+[Unit]
+Description=Omnigent server (LAN-reachable)
+Documentation=https://github.com/omnigent-ai/omnigent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# install.sh fills in the absolute `omnigent` path and a PATH snapshot
+# (node/npm/tmux/bwrap and the harness CLIs the host daemon launches all
+# need to resolve) — systemd user units don't inherit your shell's PATH.
+#
+# --host 0.0.0.0 binds every interface, not just loopback, so other devices
+# on your network (phone, tablet, another machine) can reach it. Binding a
+# non-loopback interface with no auth pinned makes `omnigent server` default
+# to accounts (login) mode automatically — first boot serves a Create-admin
+# form instead of running open. --no-open skips trying to launch a browser,
+# since this runs headless.
+ExecStart={{OMNIGENT_BIN}} server --host 0.0.0.0 --no-open
+Environment=PATH={{OMNIGENT_PATH}}
+Restart=on-failure
+RestartSec=5
+
+# Uncomment to point at state directories other than the default (~/.omnigent
+# for both). Must match whatever OMNIGENT_CONFIG_HOME/OMNIGENT_DATA_DIR you
+# use interactively, or the service will see a separate, empty state dir.
+#Environment=OMNIGENT_CONFIG_HOME=%h/.omnigent
+#Environment=OMNIGENT_DATA_DIR=%h/.omnigent
+
+[Install]
+WantedBy=default.target

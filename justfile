@@ -272,3 +272,13 @@ lint-ts:
 [group('lint')]
 normalize-locks: _ensure-uv
     uv run --no-sync scripts/normalize_uv_lock_registry.py uv.lock || true
+
+# --- systemd --user service (Linux) ---
+
+[group('systemd')]
+install-systemd:
+    deploy/systemd/install.sh
+
+[group('systemd')]
+uninstall-systemd:
+    deploy/systemd/install.sh --uninstall

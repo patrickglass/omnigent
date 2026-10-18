@@ -476,7 +476,11 @@ server); **Render** and **Railway** deploy with one click; **Fly.io**, **Hugging
 Face Spaces**, **Modal**, **Cloudflare** (serverless, scale-to-zero), and
 **Databricks Apps** (backed by Lakebase Postgres and Unity Catalog Volumes) are
 covered too — and a **Cloudflare quick tunnel** (public) or **Tailscale**
-(private) reaches a server running on your own laptop without a deploy. The
+(private) reaches a server running on your own laptop without a deploy. On
+Linux, a [`systemd --user`
+service](https://github.com/omnigent-ai/omnigent/blob/main/deploy/systemd/README.md)
+keeps a LAN-reachable server running under your own account — starting at
+login and restarting on failure — without Docker. The
 server can also provision a cloud sandbox per session (*managed hosts*), so no
 laptop has to stay online. The full menu of targets, the database options, the
 sandbox setup, and

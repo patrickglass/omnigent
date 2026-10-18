@@ -76,6 +76,11 @@ deploy/
 ├── tailscale/         ← Tailscale (private access from phone/tablet/laptop
 │   └── README.md         via tailnet; Funnel for cloud sandbox dial-back)
 │
+├── systemd/           ← run the server (LAN-reachable, --host 0.0.0.0) as a
+│   ├── omnigent.service  Linux systemd --user service (starts at login,
+│   ├── install.sh        restarts on failure); NOT a cloud deploy target.
+│   └── README.md
+│
 ├── daytona/           ← Daytona sandbox-provider guide + the Cloudflare
 │   ├── wrangler.toml     Worker egress relay for its free tier; NOT a
 │   ├── src/index.js      server deploy target. See its README.md.
@@ -127,6 +132,7 @@ deploy/
 | Stand up a quick demo (no DB to provision) | HF Spaces | [`hf-spaces/README.md`](hf-spaces/README.md): Docker Space, SQLite |
 | Share a server running on your **laptop**: demo it to teammates, or let remote runners & cloud sandboxes connect back to it (nothing to deploy) | Cloudflare quick tunnel | `cloudflared tunnel --url http://localhost:6767` |
 | Access your server privately from **your phone, tablet, or other personal devices** without exposing it to the internet | Tailscale | [`tailscale/README.md`](tailscale/README.md): `tailscale serve https / http://localhost:8000` |
+| Keep a LAN-reachable server running on **your own Linux machine** — start at login, restart on failure, survive logout | systemd `--user` service | [`systemd/README.md`](systemd/README.md): `cd deploy/systemd && ./install.sh` |
 | Cloud Run / Kubernetes / other | Docker image | [`docker/README.md`](docker/README.md), then point your platform at the image |
 | Deploy on a Databricks workspace (Lakebase + UC Volumes), self-managed | Databricks Apps | [`databricks/README.md`](databricks/README.md): uses Asset Bundles |
 
